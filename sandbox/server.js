@@ -61,7 +61,20 @@ server = http.createServer(function (req, res) {
       res.writeHead(status, {
         'Content-Type': 'application/json'
       });
-      res.end(JSON.stringify(result));
+
+      
+
+      let t = setInterval(()=> {
+        res.write(`stream! ${new Date()}`)
+      }, 1000)
+
+      setTimeout(()=> {
+        clearInterval(t);
+        res.end(JSON.stringify(result));        
+      },10001)
+
+
+      
     });
   } else {
     res.writeHead(404);
